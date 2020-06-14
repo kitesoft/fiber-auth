@@ -53,5 +53,4 @@ func DeleteProduct(c *fiber.Ctx) {
 	}
 	db.Delete(&product)
 	c.JSON(fiber.Map{"status": "success", "message": "Product successfully deleted", "data": nil})
-
 }
