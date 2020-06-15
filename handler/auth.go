@@ -12,7 +12,8 @@ import (
 	"golang.org/x/crypto/bcrypt"
 )
 
-func checkPasswordHash(password, hash string) bool {
+// CheckPasswordHash compare password with hash
+func CheckPasswordHash(password, hash string) bool {
 	err := bcrypt.CompareHashAndPassword([]byte(hash), []byte(password))
 	return err == nil
 }
@@ -96,7 +97,7 @@ func Login(c *fiber.Ctx) {
 		}
 	}
 
-	if !checkPasswordHash(pass, ud.Password) {
+	if !CheckPasswordHash(pass, ud.Password) {
 		c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{"status": "error", "message": "Invalid password", "data": nil})
 		return
 	}
